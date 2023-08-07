@@ -2,12 +2,7 @@ import { createTheme } from '@mui/material/styles';
 
 const themeColors = {
   colors: {
-    primary00: '#6953F4',
-    primary10: '#5845CC',
-    primary20: '#4738A6',
-    primary40: '#362B7F',
-    primary60: '#261E59',
-    primary80: '#161133',
+    primary00: '#0D1E3E',
     primary100: '#F5F2FD',
 
     secondary00: '#f2f2f2',
@@ -37,7 +32,10 @@ const themeColors = {
     errorDark: '#FF4557',
 
     white: '#ffffff',
-    black: '#000000'
+    black: '#000000',
+    textPending: '#FB9A0C',
+    textVerified: '#52DC30',
+    textFailed: '#FD7558'
   }
 };
 

@@ -17,8 +17,13 @@ export const WalletConnectComponentStyle = styled(
       fontSize: '30px'
     },
 
+    '.font-nunito': {
+      fontFamily: 'Nunito'
+    },
+
     '.connect-header': {
-      marginTop: '1rem'
+      marginTop: '1rem',
+      fontWeight: 'bold'
     },
 
     '.qr-code-wrapper': {

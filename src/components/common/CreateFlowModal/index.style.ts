@@ -1,11 +1,13 @@
 import { StyledComponentProps, styled } from "@mui/material";
 import { CustomTheme } from "../../../styles/type";
 
-type CreateFlowModalStyleProps = StyledComponentProps;
+type CreateFlowModalStyleProps = StyledComponentProps & {
+  componentNum: number
+};
 
 export const CreateFlowModalStyle = styled(
   "div"
-)<CreateFlowModalStyleProps>(({ theme }) => {
+)<CreateFlowModalStyleProps>(({ theme, componentNum }) => {
   const customTheme = theme as CustomTheme;
 
   return {
@@ -20,16 +22,17 @@ export const CreateFlowModalStyle = styled(
     alignItems: 'center',
 
     '.modal': {
-      width: '70rem',
-      height: '47rem',
+      minWidth: '70rem',
+      minHeight: '47rem',
       backgroundColor: customTheme.colors.white,
-      backgroundImage: 'url("/world.jpg")',
+      backgroundImage: `${componentNum === 3 ? 'none' : 'url("/world.jpg")'}`,
       backgroundSize: 'cover',
       borderRadius: '2rem',
       display: 'flex',
       flexDirection: 'column',      
       padding: '3rem 4rem 3rem 4rem',
       boxSizing: 'border-box',
+      
       // '.title': {
       //   fontSize: '1.8rem',
       //   fontWeight: '700'
@@ -43,7 +46,7 @@ export const CreateFlowModalStyle = styled(
       '.modal-header': {
         display: 'flex',
         fontSize: '2rem',
-        fontWeight: '700'
+        fontWeight: 'bold'
       },
 
       '.modal-content': {
@@ -54,10 +57,7 @@ export const CreateFlowModalStyle = styled(
 
         '.qr-content-header': {
           display: 'flex',
-          justifyContent: 'space-between'
-        },
-
-        '.flow-header': {
+          justifyContent: 'space-between',
         },
 
         '.flow-content': {
@@ -120,7 +120,14 @@ export const CreateFlowModalStyle = styled(
           // width: '28rem',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+
+          '.select-identity': {
+            width: '100%',
+            color: customTheme.colors.black,
+            borderRadius: '0.5rem',
+            backgroundColor: customTheme.colors.secondary00
+          }
         }
       },
 
@@ -145,15 +152,17 @@ export const CreateFlowModalStyle = styled(
       lineHeight: '36px'
     },
 
-    '.primary-btn': {
-        borderRadius: '5rem',
-        backgroundColor: customTheme.colors.btnPrimary00,
-        color: customTheme.colors.white
+    '.font-nunito': {
+      fontFamily: 'Nunito'
     },
 
     '.display-flex': {
       display: 'flex',
       justifyContent: 'center'
+    },
+
+      '.MuiPopover-paper': {
+        backgroundColor: `${customTheme.colors.white} !important`
     }
   }
 });

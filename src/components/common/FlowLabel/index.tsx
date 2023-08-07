@@ -5,15 +5,16 @@ import { TrashSVG } from '../../../assets/icon';
 
 type FlowLabelComponentProps = BoxProps & {
   label: string;
-  isCreated?: boolean;
+  index: number;
+  removeAttribute: (index: number) => void;
 };
 
 export const FlowLabelComponent: React.FC<FlowLabelComponentProps> = (props) => {
-  const { label, isCreated, ...rest } = props;
+  const { label, index, removeAttribute } = props;
 
-  return <FlowLabelComponentStyle className={rest.className} >
+  return <FlowLabelComponentStyle >
     { label }
-    <Button className="remove-btn">
+    <Button className="remove-btn" onClick={() => removeAttribute(index)}>
       <img src={TrashSVG}></img>
     </Button>
   </FlowLabelComponentStyle>

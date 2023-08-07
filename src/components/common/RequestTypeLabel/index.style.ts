@@ -14,7 +14,7 @@ export const RequestTypeLabelStyle = styled(
     color: '#8A6BE1',
     backgroundColor: customTheme.colors.secondary00,
     padding: '0.3rem 1rem',
-    width: '3rem',
+    width: '5rem',
     textAlign: 'center',
     cursor: 'pointer',
     margin: 'auto'

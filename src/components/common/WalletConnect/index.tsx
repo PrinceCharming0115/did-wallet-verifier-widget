@@ -15,9 +15,9 @@ export const WalletConnectComponent: React.FC = () => {
   }
 
   return <WalletConnectComponentStyle>
-    <Typography variant='h4' className='font-size-30px connect-header'>Connect with Exoid mobile</Typography>
+    <Typography variant='h4' className='font-size-30px connect-header font-nunito'>Connect with Exoid mobile</Typography>
 		<Box className='qr-code-wrapper'>
-			<Typography className='font-size-24px'>Scan this QR code with Exoid Mobile to connect</Typography>
+			<Typography className='font-size-24px font-nunito'>Scan this QR code with Exoid Mobile to connect</Typography>
 			<Box className='qr-code-container'>
 				<QRCode size={230} value={JSON.stringify(mockJson)} />
 			</Box>

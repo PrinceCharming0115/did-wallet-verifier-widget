@@ -14,7 +14,12 @@ export const DownloadAppComponentStyle = styled(
     backgroundImage: 'url("../../../assets/world.jpg")',
 
     '.font-size-30px': {
-      fontSize: '30px'
+      fontSize: '30px',
+      fontWeight: 'bold'
+    },
+
+    '.font-nunito': {
+      fontFamily: 'Nunito'
     },
 
     '.btn' : {
@@ -24,9 +29,9 @@ export const DownloadAppComponentStyle = styled(
       justifyContent: 'space-around',
       backgroundColor: customTheme.colors.black,
       textAlign: 'left',
-      padding: '0.25rem',
+      padding: '0.25rem 0.5rem',
       borderRadius: '0.5rem',
-      margin: '0 0.25rem'
+      margin: '0 0.25rem',
     },
 
     '.qr-code-wrapper': {
@@ -47,12 +52,16 @@ export const DownloadAppComponentStyle = styled(
       }
     },
 
-    '.font-size-12px': {
-        fontSize: '12px'
+    '.font-size-11px': {
+        fontSize: '11px',
     },
 
-    '.font-size-24px': {
+    '.font-size-20px': {
         fontSize: '20px'
+    },
+
+    '.font-size-18px': {
+        fontSize: '18px'
     },
 
     '.line-height-1px': {
@@ -76,6 +85,10 @@ export const DownloadAppComponentStyle = styled(
 
         'img': {
           marginLeft: '1rem'
+        },
+
+        'span': {
+          letterSpacing: '1.2px'
         }
       }
     }

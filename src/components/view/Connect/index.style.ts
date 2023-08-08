@@ -11,7 +11,6 @@ export const ConnectViewStyle = styled(
 
   return {
     textAlign: 'center',
-    // backgroundImage: 'url("/world.jpg")',
     backgroundSize: 'cover',
     height: '100%',
 
@@ -27,14 +26,19 @@ export const ConnectViewStyle = styled(
       padding: '2rem 3.5rem 3.5rem 3.5rem',
       boxShadow: '0px 70px 80px 0px #986ce478',
       width: '26.5rem',
-      margin: '4rem auto',
+      margin: '7rem auto',
       color: customTheme.colors.white,
 
       '.qr-code-container': {
-        padding: '0.75rem',
+        padding: '1rem',
         backgroundColor: customTheme.colors.white,
         borderRadius: '1.5rem',
-        marginTop: '1rem'
+        marginTop: '1rem',
+
+        'svg': {
+          width: '100%',
+          height: '100%'
+        }
       }
     },
 

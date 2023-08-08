@@ -7,17 +7,19 @@ import { DropDownComponent } from '../Dropdown';
 
 type CountryRequestComponentProps = BoxProps & {
   label: string;
+  index: number;
+  removeAttribute: (index: number) => void;
 };
 
 export const CountryRequestComponent: React.FC<CountryRequestComponentProps> = (props) => {
-  const { label, ...rest } = props;
+  const { label, index, removeAttribute, ...rest } = props;
 
   const mockData = ['UK','France', 'Italy','Cyprus','Finland'];
 
   return <CountryRequestComponentStyle className={rest.className} >
     <Box className='label-wrapper'>
       { label }
-      <Button className="remove-btn">
+      <Button className="remove-btn" onClick={() => removeAttribute(index)}>
         <img src={TrashSVG}></img>
       </Button>
     </Box>

@@ -45,10 +45,7 @@ export const CreateFlowView: React.FC<CreateFlowViewProps> = (props) => {
   }
 
   const mockJson = {
-    1: 'Apple',
-    2: 'Orange',
-    3: 'Banana',
-    4: 'Pear'
+    
   }
 
   return <CreateFlowViewStyle>
@@ -76,22 +73,17 @@ export const CreateFlowView: React.FC<CreateFlowViewProps> = (props) => {
               {
                 attributeList.map((item: AttributeListType, index: number) => (
                 <Box className='label-container margin-top-8px' key={index}>
-                  <FlowLabelComponent label={item.attribute} index={index} removeAttribute={removeAttribute} />
+                  {
+                    item.attribute === 'Age range' 
+                      ? <AgeRangeComponent label={item.attribute} index={index} removeAttribute={removeAttribute} ></AgeRangeComponent>
+                      : item.attribute === 'List of countries to include'
+                        ? <CountryRequestComponent label={item.attribute} index={index} removeAttribute={removeAttribute}></CountryRequestComponent>
+                        : <FlowLabelComponent label={item.attribute} index={index} removeAttribute={removeAttribute}></FlowLabelComponent>
+                  }
+                  {/* <FlowLabelComponent label={item.attribute} index={index} removeAttribute={removeAttribute} /> */}
                 </Box>
                 ))
               }
-              {/* <Box className='label-container margin-top-8px'>
-                  <FlowLabelComponent label='Driving Licence verification' />
-              </Box>
-              <Box className='label-container margin-top-8px'>
-                  <FlowLabelComponent label='Driving Licence verification' />
-              </Box>
-              <Box className='label-container margin-top-8px'>
-                  <AgeRangeComponent label='Age range' />
-              </Box>
-              <Box className='label-container margin-top-8px'>
-                  <CountryRequestComponent label='List of countries to include' />
-              </Box> */}
               {
                 isAddAttribute && 
                 <Box className='label-container margin-top-8px'>
@@ -114,15 +106,6 @@ export const CreateFlowView: React.FC<CreateFlowViewProps> = (props) => {
                   </Box>
                   ))
               }
-              {/* <Box className='request-type-item'>
-                  <RequestTypeLabelComponent type={0}/>
-              </Box>
-              <Box className='request-type-item'>
-                  <RequestTypeLabelComponent type={0}/>
-              </Box>
-              <Box className='request-type-item'>
-                  <RequestTypeLabelComponent type={0}/>
-              </Box> */}
               </Box>
           </Box>
           <Box className='qr-preview'>
@@ -135,9 +118,12 @@ export const CreateFlowView: React.FC<CreateFlowViewProps> = (props) => {
             </Box>
           </Box>
       </Box>
-      <Box className='main-footer'>
-        <ButtonComponent className='save-btn primary-btn font-nunito'>Save flow</ButtonComponent>    
-      </Box>
+      {
+        attributeList.length !== 0 && 
+          <Box className='main-footer'>
+            <ButtonComponent className='save-btn primary-btn font-nunito'>Save flow</ButtonComponent>    
+          </Box>
+      }
     </Box>
   </CreateFlowViewStyle>
 }

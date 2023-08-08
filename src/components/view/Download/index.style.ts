@@ -9,8 +9,6 @@ export const DownloadViewStyle = styled('div')<DownloadViewStyleProps>(
 
     return {
         textAlign: 'center',
-        backgroundImage: 'url("world.jpg")',
-        backgroundSize: 'cover',
         height: '100%',
     
         '.btn-group': {

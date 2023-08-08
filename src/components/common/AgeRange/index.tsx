@@ -6,10 +6,12 @@ import { Box } from '@mui/system';
 
 type AgeRangeComponentProps = BoxProps & {
   label: string;
+  index: number;
+  removeAttribute: (index: number) => void;
 };
 
 export const AgeRangeComponent: React.FC<AgeRangeComponentProps> = (props) => {
-  const { label, ...rest } = props;
+  const { label, index, removeAttribute, ...rest } = props;
 
   return <AgeRangeComponentStyle className={rest.className} >
     { label }
@@ -18,7 +20,7 @@ export const AgeRangeComponent: React.FC<AgeRangeComponentProps> = (props) => {
       <input type='number' className='age-input' />
       <span className='age-label'>TO</span>
       <input type='number' className='age-input' />
-      <Button className="remove-btn">
+      <Button className="remove-btn" onClick={() => removeAttribute(index)}>
         <img src={TrashSVG}></img>
       </Button>
     </Box>

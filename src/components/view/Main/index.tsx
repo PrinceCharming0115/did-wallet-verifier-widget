@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   BoxProps,
@@ -35,11 +36,12 @@ const rows = [
 ];
 
 export const MainView: React.FC<MainViewProps> = (props) => {
+  const navigate = useNavigate();
 
   return <MainViewStyle>
     <Typography className='font-size-40px font-nunito bold-text'>Available flows</Typography>
     <Box className='new-btn-group'>
-      <ButtonComponent className='primary-btn font-nunito new-flow-btn'>
+      <ButtonComponent onClick={() => {navigate(PATH.CREATE)}} className='primary-btn font-nunito new-flow-btn'>
         <PlusSVG svgColor='white' />
         <span className='new-flow-span'>New flow</span>
       </ButtonComponent>  

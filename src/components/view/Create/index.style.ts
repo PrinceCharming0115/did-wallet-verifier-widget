@@ -17,18 +17,12 @@ export const CreateFlowViewStyle = styled(
       display: 'flex',
       flexDirection: 'column',      
       
-      // '.title': {
-      //   fontSize: '1.8rem',
-      //   fontWeight: '700'
-      // },
-
-      // '.btn': {
-      //   borderRadius: '0.5rem',
-      //   backgroundColor: `${customTheme.colors.black} !important`
-      // }
-
       '.main-header': {
         fontWeight: 'bold'
+      },
+
+      '.main-footer': {
+        marginTop: '2rem'
       },
 
       '.main-content': {
@@ -52,6 +46,7 @@ export const CreateFlowViewStyle = styled(
 
             '.add-btn': {
               padding: '0.6rem 1rem',
+              fontSize: '15px'
             },
 
             '.verify-container' : {
@@ -114,7 +109,8 @@ export const CreateFlowViewStyle = styled(
       },
 
       '.save-btn': {
-        padding: '1.2rem 2rem'
+        padding: '1.2rem 2rem',
+        fontSize: '16px'
       },
     },
 
@@ -126,16 +122,8 @@ export const CreateFlowViewStyle = styled(
       marginTop: '0.5rem'
     },
 
-    '.bold-text' : {
-      fontWeight: 'bold'
-    },
-
     '.line-height-36px': {
       lineHeight: '36px'
-    },
-
-    '.font-nunito': {
-      fontFamily: 'Nunito'
     },
 
     '.primary-btn': {

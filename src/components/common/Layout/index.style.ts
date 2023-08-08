@@ -1,12 +1,14 @@
 import { keyframes } from '@emotion/react';
 import { StyledComponentProps, styled } from '@mui/material';
-
+import { PATH } from '../../../consts';
 import { CustomTheme } from "../../../styles/type";
 
-type LayoutStyleProps = StyledComponentProps & {};
+type LayoutStyleProps = StyledComponentProps & {
+  currentPath: string
+};
 
 export const LayoutStyle = styled('div')<LayoutStyleProps>(
-  ({ theme }) => {
+  ({ theme, currentPath }) => {
     const customTheme = theme as CustomTheme;
 
     return {
@@ -27,8 +29,9 @@ export const LayoutStyle = styled('div')<LayoutStyleProps>(
         width: '80%',
         backgroundColor: customTheme.colors.white,
         borderRadius: '2rem',
+        backgroundSize: 'cover',
         padding: '4rem 2rem',
-        backgroundImage: 'url("/world.jpg")',
+        backgroundImage: (currentPath !== PATH.CONNECT && currentPath !== PATH.FIRST) ? '' : 'url(/world.jpg)',
 
 
         '.header-container': {

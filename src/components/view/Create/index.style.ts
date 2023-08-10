@@ -34,6 +34,12 @@ export const CreateFlowViewStyle = styled(
         '.qr-content-header': {
           display: 'flex',
           justifyContent: 'space-between',
+
+          '.add-attribute-btn-wrapper': {
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '28rem'
+          }
         },
 
         '.flow-content': {
@@ -50,11 +56,7 @@ export const CreateFlowViewStyle = styled(
             },
 
             '.verify-container' : {
-              width: '28rem',
-            },
-
-            '.request-type-container' : {
-              width: '25%',
+              width: '48rem',
 
               '.request-icon': {
                 width: '16px',
@@ -94,10 +96,6 @@ export const CreateFlowViewStyle = styled(
         },
 
         '.label-container': {
-          // width: '28rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
 
           '.select-identity': {
             width: '100%',

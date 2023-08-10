@@ -28,11 +28,10 @@ export const LayoutStyle = styled('div')<LayoutStyleProps>(
       '.main-container': {
         width: '80%',
         backgroundColor: customTheme.colors.white,
-        borderRadius: '2rem',
+        borderRadius: '2rem 0 0 2rem',
         backgroundSize: 'cover',
         padding: '4rem 2rem',
         backgroundImage: (currentPath !== PATH.CONNECT && currentPath !== PATH.FIRST) ? '' : 'url(/world.jpg)',
-
 
         '.header-container': {
           width: '100%',

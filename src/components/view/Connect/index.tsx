@@ -5,7 +5,6 @@ import {
   Typography
 } from '@mui/material';
 import QRCode from 'react-qr-code';
-import { CreateFlowModal } from '../../common';
 import { ConnectViewStyle } from './index.style';
 
 type ConnectViewProps = BoxProps & {

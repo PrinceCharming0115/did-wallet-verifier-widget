@@ -12,10 +12,10 @@ import {
   TableRow,
   Paper
 } from '@mui/material';
-import { ButtonComponent, CreateFlowModal } from '../../common';
+import { Link } from 'react-router-dom';
+import { ButtonComponent } from '../../common';
 import { MainViewStyle } from './index.style';
 import { PlusSVG } from '../../../assets/sidebar';
-import { Link } from 'react-router-dom';
 import { InteractionSVG } from '../../../assets/icon';
 import { PATH } from '../../../consts';
 

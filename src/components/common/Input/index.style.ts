@@ -29,14 +29,6 @@ export const InputComponentStyle = styled(
     borderColor: customTheme.colors.primary40,
     backgroundColor: customTheme.colors.secondary00,
 
-    // ':has(div.focused)': {
-    //   outline: `1px solid ${customTheme.colors.primaryLight80}`,
-    // },
-
-    // ':has(div.error)': {
-    //   outline: `1px solid ${customTheme.colors.errorDark}`,
-    // },
-
     '.text-container': {
       display: 'flex',
       flexDirection: 'column',

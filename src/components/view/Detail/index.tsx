@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   BoxProps, 
   Box, 
@@ -17,15 +17,8 @@ import { Link } from 'react-router-dom';
 import QRCode from 'react-qr-code';
 import { ButtonComponent } from '../../common';
 import { InputComponent } from '../../common';
-import { DropDownComponent } from '../../common/Dropdown';
-import { FlowLabelComponent } from '../../common';
 import { DetailFlowViewStyle } from './index.style';
-import { RequestTypeLabelComponent } from '../../common';
-import { requestList } from '../../../consts';
-import { CloseSVG, EyeSVG, InteractionExportSVG, PdfSVG, PngSVG, QuestionSVG, UsersSVG } from '../../../assets/icon';
-import { AgeRangeComponent } from '../../common/AgeRange';
-import { CountryRequestComponent } from '../../common/CountryRequest';
-import { CustomTheme } from '../../../styles/type';
+import { CloseSVG, EyeSVG, InteractionExportSVG, PdfSVG, PngSVG, UsersSVG } from '../../../assets/icon';
 
 type DetailFlowViewProps = BoxProps & {};
 

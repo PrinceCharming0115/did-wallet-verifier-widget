@@ -8,7 +8,7 @@ type AgeRangeComponentProps = BoxProps & {
   label: string;
   index: number;
   type: string;
-  removeAttribute: (index: number) => void;
+  removeAttribute: (index: number, label: string) => void;
   handleInputChange: (value: number, type: string) => void;
 };
 
@@ -24,7 +24,7 @@ export const AgeRangeComponent: React.FC<AgeRangeComponentProps> = (props) => {
         <input onChange={(e) => {handleInputChange(parseInt(e.target?.value), 'from')}} type='number' className='age-input' />
         <span className='age-label'>TO</span>
         <input onChange={(e) => {handleInputChange(parseInt(e.target?.value), 'to')}} type='number' className='age-input' />
-        <Button className="remove-btn" onClick={() => removeAttribute(index)}>
+        <Button className="remove-btn" onClick={() => removeAttribute(index, label)}>
           <img src={TrashSVG}></img>
         </Button>
       </Box>

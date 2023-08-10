@@ -11,7 +11,7 @@ type FlowLabelComponentProps = BoxProps & {
   label: string;
   index: number;
   type: string;
-  removeAttribute: (index: number) => void;
+  removeAttribute: (index: number, label: string) => void;
 };
 
 export const FlowLabelComponent: React.FC<FlowLabelComponentProps> = (props) => {
@@ -20,7 +20,7 @@ export const FlowLabelComponent: React.FC<FlowLabelComponentProps> = (props) => 
   return <FlowLabelComponentStyle >
     <Box className='request-container'>
       { label }
-      <Button className="remove-btn" onClick={() => removeAttribute(index)}>
+      <Button className="remove-btn" onClick={() => removeAttribute(index, label)}>
         <img src={TrashSVG}></img>
       </Button>
     </Box>

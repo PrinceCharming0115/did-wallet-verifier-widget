@@ -67,6 +67,10 @@ export const CreateFlowViewStyle = styled(
             '.request-type-item': {
               padding: '0.8rem',
               marginTop: '0.5rem'
+            },
+
+            '.attribute-list': {
+              width: '28rem'
             }
           },
 

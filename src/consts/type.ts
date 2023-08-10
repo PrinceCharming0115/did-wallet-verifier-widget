@@ -3,6 +3,11 @@ export const REQUEST_TYPE = {
 	DATA: 'Data'
 }
 
+export const COUNTRY_REQUEST_TYPE = {
+	INCLUDE: 'include',
+	EXCLUDE: 'exclude'
+}
+
 export const requestList = ['General Identity Document', 'First name', 'Last name', `Driver's License`, 'Nationality', 'Email address', 'Age range', 'Birth date', 'List of countries to include', 'List of countries to exclude'];
 
 export const credentialSubjectArray = [

@@ -135,30 +135,45 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
         <Typography className='main-header font-size-40px font-nunito'>Verification flow</Typography>
       </Box>
       <Box className='main-content margin-top-2rem'>
-        <Box className='flow-header'>
-          <Typography className='label font-nunito'> Verification Flow name </Typography>
-          <Box className='label-container margin-top-8px'>
-            <InputComponent readOnly value={'Driving License verification'} />
-          </Box>
-        </Box>
-        <Box className='flow-content margin-top-2rem'>
-          <Box className='qr-content'>
-            <Box className='verify-container'>              
-              <Box className='qr-content-header'>
-                <Typography className='bold-text line-height-36px font-nunito'>Request information to verify</Typography>            
-              </Box>    
-              <Box className='request-name'>                
-                <InputComponent readOnly value={'Proof of human verification'} />
-              </Box>                                  
-              <Box className='request-name'>                
-                <InputComponent readOnly />
+        <Box className='flow-info'>
+          <Box>
+            <Box className='flow-header'>
+              <Typography className='label font-nunito'> Verification Flow name </Typography>
+              <Box className='label-container margin-top-8px'>
+                <InputComponent readOnly value={'Driving License verification'} />
               </Box>
-              <Box className='request-name'>                
-                <InputComponent readOnly />
+            </Box>
+            <Box className='flow-content margin-top-2rem'>
+              <Box className='qr-content'>
+                <Box className='verify-container'>              
+                  <Box className='qr-content-header'>
+                    <Typography className='bold-text line-height-36px font-nunito'>Request information to verify</Typography>            
+                  </Box>    
+                  <Box className='request-name'>                
+                    <InputComponent readOnly value={'Proof of human verification'} />
+                  </Box>                                  
+                  <Box className='request-name'>                
+                    <InputComponent readOnly value={'Email address'} />
+                  </Box>
+                  <Box className='request-name'>                
+                    <InputComponent readOnly value={'Proof of being an Italian citizen'} />
+                  </Box>
+                  <Box className='request-name'>                
+                    <InputComponent readOnly value={'Proof of being an Italian citizen'} />
+                  </Box>
+                  <Box className='request-name'>                
+                    <InputComponent readOnly value={'Proof of being an Italian citizen'} />
+                  </Box>
+                  <Box className='request-name'>                
+                    <InputComponent readOnly value={'Proof of being an Italian citizen'} />
+                  </Box>
+                  
+                </Box>             
               </Box>
-            </Box>             
-          </Box>
 
+              
+            </Box>
+          </Box>
           <Box className='qr-preview'>
             <Typography variant='h5' className='qr-code-preview-header bold-text font-nunito'>QR Access Onboard</Typography>
             <Box className='qr-code-wrapper'>

@@ -1,4 +1,3 @@
-import { keyframes } from '@emotion/react';
 import { StyledComponentProps, styled } from '@mui/material';
 import { PATH } from '../../../consts';
 import { CustomTheme } from "../../../styles/type";

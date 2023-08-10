@@ -10,7 +10,7 @@ import { InputComponent } from '../../common';
 import { DropDownComponent } from '../../common/Dropdown';
 import { FlowLabelComponent } from '../../common';
 import { CreateFlowViewStyle } from './index.style';
-import { requestList, credentialSubjectArray } from '../../../consts';
+import { requestList, credentialSubjectArray, countryList, COUNTRY_REQUEST_TYPE } from '../../../consts';
 import { QuestionSVG } from '../../../assets/icon';
 import { AgeRangeComponent } from '../../common/AgeRange';
 import { CountryRequestComponent } from '../../common/CountryRequest';
@@ -25,6 +25,9 @@ export const CreateFlowView: React.FC<CreateFlowViewProps> = (props) => {
 
   const [isAddAttribute, setIsAddAttribute ] = useState<boolean>(false);
   const [attributeList, setAttributeList] = useState<AttributeListType[]>([]);
+  const [selectRequestList, setSelectRequestList] = useState<string[]>(requestList);
+  const [contriesToInclude, setCountriesToInclude] = useState<string[]>(countryList);
+  const [contriesToExclude, setCountriesToExclude] = useState<string[]>(countryList);
   
 
   const [credentialSubject, setCredentialSubject] = useState<any>({});
@@ -44,15 +47,40 @@ export const CreateFlowView: React.FC<CreateFlowViewProps> = (props) => {
 
     const tempCredentialSubject = credentialSubject;
 
-    tempCredentialSubject[filtered.key] = {};
-    setCredentialSubject({ ...tempCredentialSubject })
+    if (!tempCredentialSubject.hasOwnProperty(filtered.key)) {
+      tempCredentialSubject[filtered.key] = {};
+    }
+    setCredentialSubject({ ...tempCredentialSubject });
+
+    const tempRequestList = selectRequestList;
+    
+    setSelectRequestList(tempRequestList.filter(item => item !== value));
   }
 
-  const removeAttribute = (index: number) => {
+  const removeAttribute = (index: number, label: string, isCountry?: string) => {
+    const filtered = credentialSubjectArray.filter(obj => obj.text === label)[0];
+    if (filtered.key === 'citizenship') {
+      if (isCountry === COUNTRY_REQUEST_TYPE.INCLUDE) {
+        delete credentialSubject[filtered.key]['$in'];
+        if (!credentialSubject[filtered.key].hasOwnProperty('$nin'))  {
+          delete credentialSubject[filtered.key];
+        }
+      } else {
+        delete credentialSubject[filtered.key]['$nin'];
+        if (!credentialSubject[filtered.key].hasOwnProperty('$in'))  {
+          delete credentialSubject[filtered.key];
+        }
+      }
+      
+    } else {
+      delete credentialSubject[filtered.key];
+    }
     const tempArray = attributeList;
     tempArray.splice(index, 1);
 
     setAttributeList([...tempArray]);
+
+    setSelectRequestList([...selectRequestList, label]);
   }
 
   const ageInputChange = (value: number, type: string) => {
@@ -66,15 +94,28 @@ export const CreateFlowView: React.FC<CreateFlowViewProps> = (props) => {
     setCredentialSubject({...tempCredentialSubject});
   }
 
-  const setSelectedCountries = (values: string[], type: string) => {
+  const setSelectedCountries = (value: string, type: string) => {
+    
     const tempCredentialSubject = credentialSubject;
-    if (type === 'include') {
-      tempCredentialSubject['citizenship']['$in'] = values;
+    if (type === COUNTRY_REQUEST_TYPE.INCLUDE) {
+      const filteredCountiresToInclude = contriesToInclude.filter((country: string) => country !== value);
+      setCountriesToInclude(filteredCountiresToInclude);
+      const filteredCountiresToExclude = contriesToExclude.filter((country: string) => country !== value);
+      setCountriesToExclude(filteredCountiresToExclude);
+      const includes = tempCredentialSubject['citizenship']['$in'] ?? [];
+      tempCredentialSubject['citizenship']['$in'] = [...includes, value];
     } else {
-      tempCredentialSubject['citizenship']['$nin'] = values;
+      const filteredCountiresToInclude = contriesToInclude.filter((country: string) => country !== value);
+      setCountriesToInclude(filteredCountiresToInclude);
+      const filteredCountiresToExclude = contriesToExclude.filter((country: string) => country !== value);
+      setCountriesToExclude(filteredCountiresToExclude);
+      const excludes = tempCredentialSubject['citizenship']['$nin'] ?? [];
+      tempCredentialSubject['citizenship']['$nin'] = [...excludes, value];
     }
     setCredentialSubject({...tempCredentialSubject});
   }
+
+  console.log(credentialSubject);
   
   return <CreateFlowViewStyle>
     <Box className='main font-nunito'>      
@@ -110,9 +151,25 @@ export const CreateFlowView: React.FC<CreateFlowViewProps> = (props) => {
                   item.attribute === 'Age range' 
                     ? <AgeRangeComponent handleInputChange={ageInputChange} label={item.attribute} index={index} type={item.type} removeAttribute={removeAttribute} ></AgeRangeComponent>
                     : item.attribute === 'List of countries to include'
-                      ? <CountryRequestComponent setCountries={setSelectedCountries} group='include' label={item.attribute} index={index} type={item.type} removeAttribute={removeAttribute}></CountryRequestComponent>
+                      ? <CountryRequestComponent
+                        setCountries={setSelectedCountries}
+                        group={COUNTRY_REQUEST_TYPE.INCLUDE}
+                        label={item.attribute}
+                        index={index}
+                        type={item.type}
+                        removeAttribute={removeAttribute}
+                        options={contriesToInclude}
+                      />
                       : item.attribute === 'List of countries to exclude'
-                        ? <CountryRequestComponent setCountries={setSelectedCountries} group='exclude' label={item.attribute} index={index} type={item.type} removeAttribute={removeAttribute}></CountryRequestComponent>
+                        ? <CountryRequestComponent  
+                          setCountries={setSelectedCountries}
+                          group={COUNTRY_REQUEST_TYPE.EXCLUDE}
+                          label={item.attribute}
+                          index={index}
+                          type={item.type}
+                          removeAttribute={removeAttribute}
+                          options={contriesToExclude}
+                        />
                           : <FlowLabelComponent label={item.attribute} index={index} type={item.type} removeAttribute={removeAttribute}></FlowLabelComponent>
                 }
               </Box>
@@ -121,8 +178,9 @@ export const CreateFlowView: React.FC<CreateFlowViewProps> = (props) => {
             {
               isAddAttribute && 
               <Box className='label-container margin-top-8px'>
-                <DropDownComponent
-                  values={requestList}
+                <DropDownComponent 
+                  className='attribute-list'
+                  values={selectRequestList}
                   placeholder={'Choose new attribute'}
                   onChangeValue={handleAttributeChange}
                 />

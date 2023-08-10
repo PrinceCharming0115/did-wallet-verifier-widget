@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { BoxProps, Button, Input } from '@mui/material';
+import { BoxProps, Button, Box } from '@mui/material';
 import { CountryRequestComponentStyle } from './index.style';
 import { TrashSVG, CancelSVG } from '../../../assets/icon';
-import { Box } from '@mui/system';
 import { DropDownComponent } from '../Dropdown';
 import { countryList } from '../../../consts';
-import { group } from 'console';
 
 type CountryRequestComponentProps = BoxProps & {
   label: string;
   index: number;
   type: string;
   group: string;
-  removeAttribute: (index: number) => void;
-  setCountries: (values: string[], type: string) => void;
+  options: string[];
+  removeAttribute: (index: number, label: string, isCountry?: string) => void;
+  setCountries: (value: string, type: string) => void;
 };
 
 export const CountryRequestComponent: React.FC<CountryRequestComponentProps> = (props) => {
-  const { label, index, type, group, removeAttribute, setCountries, ...rest } = props;
+  const { label, index, type, group, options, removeAttribute, setCountries, ...rest } = props;
 
   const [dropdownCountryList, setDropdownCountryList] = useState<string[]>(countryList);
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
@@ -25,10 +24,11 @@ export const CountryRequestComponent: React.FC<CountryRequestComponentProps> = (
   const handleChangeCountry = (value: string) => {
     setSelectedCountries([...selectedCountries, value]);
 
-    const temp = dropdownCountryList.filter(function(country) {
+    const temp = dropdownCountryList.filter((country) => {
       return country !== value;
     });
     setDropdownCountryList([...temp]);
+    setCountries(value, group);
 
   }
 
@@ -39,18 +39,18 @@ export const CountryRequestComponent: React.FC<CountryRequestComponentProps> = (
     const temp = selectedCountries;
     temp.splice(index, 1);
     setSelectedCountries([...temp]);
-    setCountries(selectedCountries, group);
+    setCountries(country, group);
   }
 
   useEffect(() => {
-    setCountries(selectedCountries, group);
+    
   }, [selectedCountries]);
 
    return <CountryRequestComponentStyle className={rest.className} >
     <Box className='request-container'>
       <Box className='label-wrapper'>
         { label }
-        <Button className="remove-btn" onClick={() => removeAttribute(index)}>
+        <Button className="remove-btn" onClick={() => removeAttribute(index, label, group)}>
           <img src={TrashSVG}></img>
         </Button>
       </Box>
@@ -66,7 +66,7 @@ export const CountryRequestComponent: React.FC<CountryRequestComponentProps> = (
         }
       </Box>
       <DropDownComponent 
-        values={dropdownCountryList}     
+        values={options}     
         className='white-background'
         placeholder='Add new country'
         onChangeValue={handleChangeCountry}

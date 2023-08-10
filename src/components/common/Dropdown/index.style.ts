@@ -8,7 +8,7 @@ export const DropDownStyle = styled('div')<DropDownStyleProps>(({ theme }) => {
     const customTheme = theme as CustomTheme;
 
     return {
-      width: '100%',
+      // width: '28rem',
 
       '.label-container': {
         display: 'flex',
@@ -32,7 +32,7 @@ export const DropDownStyle = styled('div')<DropDownStyleProps>(({ theme }) => {
           display: 'flex',
           alignItems: 'center',
           padding: '1rem',
-        },
+        },        
         
         '.Dropdown-arrow': {
           top: '26px',
@@ -64,6 +64,10 @@ export const DropDownStyle = styled('div')<DropDownStyleProps>(({ theme }) => {
           margin: '0 1.5rem',
           padding: '10px'
         }
+      },
+
+      '.not-visible .Dropdown-menu': {
+        display: 'none'
       },
 
       '.white-background': {

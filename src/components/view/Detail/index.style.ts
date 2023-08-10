@@ -27,37 +27,8 @@ export const DetailFlowViewStyle = styled(
           fontWeight: 700
         },
 
-        '.qr-content-header': {
+        '.flow-info': {
           display: 'flex',
-          justifyContent: 'space-between',
-        },
-
-        '.flow-content': {
-          display: 'flex',
-
-          '.qr-content': {
-            width: '70%',
-            display: 'flex',
-            justifyContent: 'space-between',
-
-            '.request-type-container' : {
-              width: '25%',
-
-              '.request-icon': {
-                width: '16px',
-                marginLeft: '0.75rem',
-              }
-            },
-
-            '.request-name': {
-              marginTop: '0.5rem'
-            },
-
-            '.request-type-item': {
-              padding: '0.8rem',
-              marginTop: '0.5rem'
-            }
-          },
 
           '.qr-preview': {
             marginLeft: 'auto',  
@@ -97,6 +68,41 @@ export const DetailFlowViewStyle = styled(
               }
             }
           },
+        },
+
+        '.qr-content-header': {
+          display: 'flex',
+          justifyContent: 'space-between',
+        },
+
+        '.flow-content': {
+          display: 'flex',
+
+          '.qr-content': {
+            width: '70%',
+            display: 'flex',
+            justifyContent: 'space-between',
+
+            '.request-type-container' : {
+              width: '25%',
+
+              '.request-icon': {
+                width: '16px',
+                marginLeft: '0.75rem',
+              }
+            },
+
+            '.request-name': {
+              marginTop: '0.5rem'
+            },
+
+            '.request-type-item': {
+              padding: '0.8rem',
+              marginTop: '0.5rem'
+            }
+          },
+
+          
         },
 
         '.interaction-container': {

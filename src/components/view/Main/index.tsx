@@ -10,9 +10,11 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Paper
+  Paper,
+  Button
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { CSVLink, CSVDownload } from "react-csv";
 import { ButtonComponent } from '../../common';
 import { MainViewStyle } from './index.style';
 import { PlusSVG } from '../../../assets/sidebar';
@@ -26,13 +28,14 @@ function createData(
   name: string,
   createDate: string,
   counter: number,
+  flow: string
 ) {
-  return { name, createDate, counter };
+  return { name, createDate, counter, flow };
 }
 
 const rows = [
-  createData('Example - Driving License verification', '20/07/2023', 20),
-  createData('Example - Human verification', '20/07/2023', 8),
+  createData('Example - Driving License verification', '20/07/2023', 20, "{firstname: {}, lastname: {}, emailAddress: {}, age: {$gt: 20, $lt: 50}}"),
+  createData('Example - Human verification', '20/07/2023', 8, "{firstname: {}, lastname: {}, citizenship: {$in: ['Italy', 'Finland']}}"),
 ];
 
 export const MainView: React.FC<MainViewProps> = (props) => {
@@ -70,9 +73,9 @@ export const MainView: React.FC<MainViewProps> = (props) => {
               <TableCell>{row.createDate}</TableCell>
               <TableCell align='center'>{row.counter}</TableCell>
               <TableCell align='center'>
-                <Link to='#javascript'>
+                <CSVLink data={JSON.stringify(row)} filename='interaction.csv' className='interaction-btn'>
                   <img src={InteractionSVG}></img>
-                </Link>
+                </CSVLink>
               </TableCell>
               <TableCell>
                 <Link  className='link-to-page' to={`${PATH.FLOW}/1`}>Verification page</Link>

@@ -33,6 +33,11 @@ export const MainViewStyle = styled('div')<MainViewStyleProps>(
           borderCollapse: 'separate',
           borderSpacing: '0px 7px',
 
+          '.interaction-btn': {
+            padding: 0,
+            minWidth: '10px'
+          },
+
           'thead > tr > th': {
             backgroundColor: 'transparent',
             paddingBottom: '10px'

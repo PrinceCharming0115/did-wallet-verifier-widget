@@ -15,10 +15,13 @@ import {
  } from '@mui/material';
 import { Link } from 'react-router-dom';
 import QRCode from 'react-qr-code';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { ButtonComponent } from '../../common';
 import { InputComponent } from '../../common';
 import { DetailFlowViewStyle } from './index.style';
 import { CloseSVG, EyeSVG, InteractionExportSVG, PdfSVG, PngSVG, UsersSVG } from '../../../assets/icon';
+import { CSVLink } from 'react-csv';
 
 type DetailFlowViewProps = BoxProps & {};
 
@@ -96,6 +99,19 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
   const [isAddAttribute, setIsAddAttribute ] = useState<boolean>(false);
   const [attributeList, setAttributeList] = useState<AttributeListType[]>([]);
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const qrcodeRef = React.createRef();
+
+  const mockJson = {
+    1: 'Apple',
+    2: 'Orange',
+    3: 'Banana',
+    4: 'Pear'
+  }
+
 
   const handleAddAttributeClick = () => {
     setIsAddAttribute(true);
@@ -117,15 +133,30 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
     setAttributeList([...tempArray]);
   }
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const exportQRCodeToPDF = () => {
+    const qrCodeElement = document.querySelector('#QRCode') as HTMLElement;
+    html2canvas(qrCodeElement).then(canvas => {
+      const imageData = canvas.toDataURL('image/png');
+  
+      const pdf = new jsPDF();
+  
+      pdf.addImage(imageData, 'PNG', 10, 10, 50, 50); 
+  
+      pdf.save('qrcode.pdf');
+    });
+  }
 
-  const mockJson = {
-    1: 'Apple',
-    2: 'Orange',
-    3: 'Banana',
-    4: 'Pear'
+  const exportQRCodeToPNG = () => {
+    const qrCodeElement = document.querySelector('#QRCode') as HTMLElement;
+    html2canvas(qrCodeElement).then(canvas => {
+     
+      const imageData = canvas.toDataURL('image/png');
+       
+      const link = document.createElement('a');
+      link.href = imageData;
+      link.download = 'qrcode.png'; 
+      link.click();
+    });
   }
 
   return <DetailFlowViewStyle>
@@ -177,16 +208,16 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
           <Box className='qr-preview'>
             <Typography variant='h5' className='qr-code-preview-header bold-text font-nunito'>QR Access Onboard</Typography>
             <Box className='qr-code-wrapper'>
-              <Box className='qr-code-container'>
+              <Box className='qr-code-container' id="QRCode">
                 <QRCode size={180} value={JSON.stringify(mockJson)} />
               </Box>
             </Box>
             <Box className='export-btn-group'>
-              <ButtonComponent className='primary-btn export-btn'>
+              <ButtonComponent onClick={exportQRCodeToPDF} className='primary-btn export-btn'>
                 <img src={PdfSVG}></img>
                 <span className='font-nunito'>PDF</span>
               </ButtonComponent>
-              <ButtonComponent className='primary-btn export-btn'>
+              <ButtonComponent onClick={exportQRCodeToPNG} className='primary-btn export-btn'>
                 <img src={PngSVG}></img>
                 <span className='font-nunito'>PNG</span>
               </ButtonComponent>
@@ -247,10 +278,10 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
               </TableContainer>
             </Box>
             <Box className='export-interaction-group'> 
-              <ButtonComponent className='primary-btn'>
+              <CSVLink data={rows} filename='interactions.csv' className='primary-btn'>
                 <img src={InteractionExportSVG}></img>
                 <span className='font-nunito'>Export Interactions</span>
-              </ButtonComponent>
+              </CSVLink>
               <Box className='counter-container'>
                 <img src={UsersSVG}></img>
                 <span className='counter font-nunito'>43</span>

@@ -101,7 +101,8 @@ export const LayoutStyle = styled('div')<LayoutStyleProps>(
         backgroundColor: customTheme.colors.btnPrimary00,
         color: customTheme.colors.white,
         letterSpacing: '0.7px',
-        fontWeight: '400'
+        fontWeight: '400',
+        textDecoration: 'none'
       },
     }
   }

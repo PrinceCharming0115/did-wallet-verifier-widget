@@ -5,10 +5,16 @@ import rootSaga from "./sagas";
 import {
   loadingReducer,
   loadingActions,
+  verificationActions,
+  verificationReducer,
+  interactionActions,
+  interactionReducer,
 } from "./slices";
 
 const reducer = combineReducers({
   loading: loadingReducer,
+  verification: verificationReducer,
+  interaction: interactionReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -24,6 +30,8 @@ export const store = configureStore({
 
 export const AppActions = {
   loading: loadingActions,
+  verification: verificationActions,
+  interaction: interactionActions
 };
 
 sagaMiddleware.run(rootSaga);

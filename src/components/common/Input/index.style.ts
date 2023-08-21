@@ -12,7 +12,7 @@ type InputComponentStyleProps = StyledComponentProps &
 
 export const InputComponentStyle = styled(
   'div'
-)<InputComponentStyleProps>(({ theme, border }) => {
+)<InputComponentStyleProps>(({ theme, border, error, inputSize}) => {
   const customTheme = theme as CustomTheme;
 
   return {
@@ -28,6 +28,10 @@ export const InputComponentStyle = styled(
     border: `${border? 'solid 1px': ''}`,
     borderColor: customTheme.colors.primary40,
     backgroundColor: customTheme.colors.secondary00,
+
+    ':has(div.error)': {
+      border: `1px solid ${customTheme.colors.colorFeedbackWarning}`,
+    },
 
     '.text-container': {
       display: 'flex',

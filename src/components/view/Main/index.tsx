@@ -15,13 +15,20 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { CSVLink, CSVDownload } from "react-csv";
-import { ButtonComponent } from '../../common';
+import { useSelector } from 'react-redux';
+import { ButtonComponent, PaginationComponent } from '../../common';
 import { MainViewStyle } from './index.style';
 import { PlusSVG } from '../../../assets/sidebar';
 import { InteractionSVG } from '../../../assets/icon';
 import { PATH } from '../../../consts';
+import { VerificationModel } from '../../../models';
+
 
 type MainViewProps = BoxProps & {
+  verifications: VerificationModel[];
+  setPageNumber: (currentNumber: number) => void;
+  pageNumber: number;
+  verificationTotalNumber: number;
 };
 
 function createData(
@@ -33,12 +40,9 @@ function createData(
   return { name, createDate, counter, flow };
 }
 
-const rows = [
-  createData('Example - Driving License verification', '20/07/2023', 20, "{firstname: {}, lastname: {}, emailAddress: {}, age: {$gt: 20, $lt: 50}}"),
-  createData('Example - Human verification', '20/07/2023', 8, "{firstname: {}, lastname: {}, citizenship: {$in: ['Italy', 'Finland']}}"),
-];
 
 export const MainView: React.FC<MainViewProps> = (props) => {
+  
   const navigate = useNavigate();
 
   return <MainViewStyle>
@@ -62,28 +66,32 @@ export const MainView: React.FC<MainViewProps> = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {props.verifications.length > 0 && props.verifications.map((row, index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.verificationFlowName}
               </TableCell>
-              <TableCell>{row.createDate}</TableCell>
-              <TableCell align='center'>{row.counter}</TableCell>
+              <TableCell>{row.createdAt}</TableCell>
+              <TableCell align='center'>{9}</TableCell>
               <TableCell align='center'>
-                <CSVLink data={JSON.stringify(row)} filename='interaction.csv' className='interaction-btn'>
+                <CSVLink data={row.verificationFlow} filename='interaction.csv' className='interaction-btn'>
                   <img src={InteractionSVG}></img>
                 </CSVLink>
               </TableCell>
               <TableCell>
-                <Link  className='link-to-page' to={`${PATH.FLOW}/1`}>Verification page</Link>
+                <Link  className='link-to-page' to={`${PATH.FLOW}/${row.id}`}>Verification page</Link>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      {/* <PaginationComponent 
+        setPageNumber={props.setPageNumber} 
+        pageNumber={props.pageNumber} 
+        verificationTotalNumber={props.verificationTotalNumber} /> */}
     </TableContainer>
   </MainViewStyle>
 };

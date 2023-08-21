@@ -12,53 +12,53 @@ export const requestList = ['General Identity Document', 'First name', 'Last nam
 
 export const credentialSubjectArray = [
 	{ 
-		text: 'General Identity Document',
-		key: 'nationalID',
+		text: "General Identity Document",
+		key: "nationalID",
 		type: REQUEST_TYPE.DATA	
 	},
 	{ 
-		text: 'First name',
-		key: 'firstname',
+		text: "First name",
+		key: "firstname",
 		type: REQUEST_TYPE.DATA
 	},
 	{ 
-		text: 'Last name',
-		key: 'lastname',
+		text: "Last name",
+		key: "lastname",
 		type: REQUEST_TYPE.DATA
 	},
 	{ 
 		text: "Driver's License",
-		key: 'driverLicense',
+		key: "driverLicense",
 		type: REQUEST_TYPE.DATA
 	},
 	{ 
-		text: 'Nationality',
-		key: 'nationality',
+		text: "Nationality",
+		key: "nationality",
 		type: REQUEST_TYPE.DATA
 	},
 	{ 
-		text: 'Email address',
-		key: 'emailAddress',
+		text: "Email address",
+		key: "emailAddress",
 		type: REQUEST_TYPE.DATA
 	},
 	{ 
-		text: 'Age range',
-		key: 'age',
+		text: "Age range",
+		key: "age",
 		type: REQUEST_TYPE.PROOF
 	},
 	{ 
-		text: 'Birth date',
-		key: 'birthDate',
+		text: "Birth date",
+		key: "birthDate",
 		type: REQUEST_TYPE.DATA
 	},
 	{ 
-		text: 'List of countries to include',
-		key: 'citizenship',
+		text: "List of countries to include",
+		key: "citizenship",
 		type: REQUEST_TYPE.PROOF
 	},
 	{ 
-		text: 'List of countries to exclude',
-		key: 'citizenship',
+		text: "List of countries to exclude",
+		key: "citizenship",
 		type: REQUEST_TYPE.PROOF
 	},
 ]

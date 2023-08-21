@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { 
   BoxProps, 
   Box, 
@@ -22,22 +22,14 @@ import { InputComponent } from '../../common';
 import { DetailFlowViewStyle } from './index.style';
 import { CloseSVG, EyeSVG, InteractionExportSVG, PdfSVG, PngSVG, UsersSVG } from '../../../assets/icon';
 import { CSVLink } from 'react-csv';
+import { VerificationModel, InteractionModel } from '../../../models';
+import { credentialSubjectArray } from '../../../consts';
 
-type DetailFlowViewProps = BoxProps & {};
+type DetailFlowViewProps = BoxProps & {
+  verification: VerificationModel;
+  interactions: InteractionModel[];
+};
 
-function createData(
-  name: string,
-  result: number,
-  date: string,
-) {
-  return { name, result, date };
-}
-
-const rows = [
-  createData('FedeG', 2, '20/07/2023'),
-  createData('ChiaraS', 1, '20/07/2023'),
-  createData('JohnV', 3, '20/07/2023'),
-];
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -105,6 +97,15 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
 
   const qrcodeRef = React.createRef();
 
+  
+  let temp = '';
+  if (!!props.verification.verificationFlow) {
+    console.log("verificationFlow:", props.verification);
+
+    temp = JSON.parse(props.verification.verificationFlow);
+  }
+  const verificationFlowKeys = Object.keys(temp);
+
   const mockJson = {
     1: 'Apple',
     2: 'Orange',
@@ -171,34 +172,24 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
             <Box className='flow-header'>
               <Typography className='label font-nunito'> Verification Flow name </Typography>
               <Box className='label-container margin-top-8px'>
-                <InputComponent readOnly value={'Driving License verification'} />
+                <InputComponent readOnly value={!!props.verification.verificationFlowName && props.verification.verificationFlowName} />
               </Box>
             </Box>
             <Box className='flow-content margin-top-2rem'>
               <Box className='qr-content'>
-                <Box className='verify-container'>              
+                <Box className='verify-container'>        
                   <Box className='qr-content-header'>
                     <Typography className='bold-text line-height-36px font-nunito'>Request information to verify</Typography>            
                   </Box>    
-                  <Box className='request-name'>                
-                    <InputComponent readOnly value={'Proof of human verification'} />
-                  </Box>                                  
-                  <Box className='request-name'>                
-                    <InputComponent readOnly value={'Email address'} />
-                  </Box>
-                  <Box className='request-name'>                
-                    <InputComponent readOnly value={'Proof of being an Italian citizen'} />
-                  </Box>
-                  <Box className='request-name'>                
-                    <InputComponent readOnly value={'Proof of being an Italian citizen'} />
-                  </Box>
-                  <Box className='request-name'>                
-                    <InputComponent readOnly value={'Proof of being an Italian citizen'} />
-                  </Box>
-                  <Box className='request-name'>                
-                    <InputComponent readOnly value={'Proof of being an Italian citizen'} />
-                  </Box>
-                  
+                {
+                  verificationFlowKeys.length > 0 && verificationFlowKeys.map((item, index) => (
+ 
+                    <Box className='request-name' key={index}>                
+                     <InputComponent readOnly value={ credentialSubjectArray.filter(obj => obj.key === item)[0].text } />
+                    </Box>  
+                  ))
+                }      
+                 
                 </Box>             
               </Box>
 
@@ -239,13 +230,13 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows.map((row) => (
+                    {props.interactions.map((row, index) => (
                       <TableRow
-                        key={row.name}
+                        key={index}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                       >
                         <TableCell component="th" scope="row">
-                          {row.name}
+                          {'Fedg'}
                         </TableCell>
                         <TableCell 
                           align='center'
@@ -265,7 +256,7 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
                                     'Failed'
                           }
                         </TableCell>
-                        <TableCell align='center'>{row.date}</TableCell>
+                        <TableCell align='center'>{row.createdAt}</TableCell>
                         <TableCell align='center'>
                           <Link onClick={handleOpen} to='#javascript'>
                             <img src={EyeSVG}></img>
@@ -278,13 +269,13 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
               </TableContainer>
             </Box>
             <Box className='export-interaction-group'> 
-              <CSVLink data={rows} filename='interactions.csv' className='primary-btn'>
+              <CSVLink data={props.interactions} filename='interactions.csv' className='primary-btn'>
                 <img src={InteractionExportSVG}></img>
                 <span className='font-nunito'>Export Interactions</span>
               </CSVLink>
               <Box className='counter-container'>
                 <img src={UsersSVG}></img>
-                <span className='counter font-nunito'>43</span>
+                <span className='counter font-nunito'>0</span>
                 <span className='font-nunito'>Access counter</span>
               </Box>
             </Box>

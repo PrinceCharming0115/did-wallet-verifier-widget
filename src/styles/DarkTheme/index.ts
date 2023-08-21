@@ -35,7 +35,9 @@ const themeColors = {
     black: '#000000',
     textPending: '#FB9A0C',
     textVerified: '#52DC30',
-    textFailed: '#FD7558'
+    textFailed: '#FD7558',
+
+    colorFeedbackWarning: 'red'
   }
 };
 

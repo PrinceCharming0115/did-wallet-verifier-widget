@@ -13,12 +13,13 @@ export async function makeAPIRequst(
   } = {};
 
   if (isTokenIncluded) {
-    headers.Authorization = `Bearer ${localStorage.getItem("token") ?? ""}`;
+    // headers.Authorization = `Bearer ${localStorage.getItem("token") ?? ""}`;
+    headers.Authorization = `Bearer did:333e`;
   }
 
   try {
     const response = await axios({
-      url: `${process.env.REACT_APP_GITHUB_API}/${url}`,
+      url: `${process.env.REACT_APP_BACKEND_API_ENDPOINT}/${url}`,
       method: method,
       data: body,
       headers: headers,

@@ -13,8 +13,8 @@ export async function makeAPIRequst(
   } = {};
 
   if (isTokenIncluded) {
-    // headers.Authorization = `Bearer ${localStorage.getItem("token") ?? ""}`;
-    headers.Authorization = `Bearer did:333e`;
+    headers.Authorization = `Bearer ${localStorage.getItem("token") ?? ""}`;
+    // headers.Authorization = `Bearer did:333e`;
   }
 
   try {

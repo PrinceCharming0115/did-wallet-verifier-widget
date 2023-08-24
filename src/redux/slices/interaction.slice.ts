@@ -5,11 +5,13 @@ import { AppActionTypes } from "../store";
 type InteractionState = {
   interactions: InteractionModel[];
   interaction: InteractionModel;
+  interactionTotalNumber: number;
 };
 
 const initialState: InteractionState = {
   interactions: [],
-  interaction: {} as InteractionModel
+  interaction: {} as InteractionModel,
+  interactionTotalNumber: 0
 };
 
 const interactionSlice = createSlice({
@@ -41,6 +43,14 @@ const interactionSlice = createSlice({
       state.interaction = action.payload;
     },
     getInteractionFailure(_state: InteractionState) { },
+
+    // Set interaction total number
+    setInteractionTotalNumber(
+      state: InteractionState,
+      action: PayloadAction<number>
+    ) {
+      state.interactionTotalNumber = action.payload;
+    }
 
   },
 });

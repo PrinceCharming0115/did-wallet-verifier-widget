@@ -29,9 +29,9 @@ function* getVerificationsRequestSaga(
       return await makeAPIRequst(`verification/get-verification-list?page=${action.payload.pageNumber}`, "GET");
     });
     
-    console.log("result:", result.data);
     yield put(AppActions.loading.finishLoading());
     yield put(AppActions.verification.getVerificationsSuccess(result.data.verificationList));
+    
     yield put(AppActions.verification.setVerificationTotalNumber(result.data.verificationTotalNumber));
     if (action.payload.next) {
       action.payload.next();

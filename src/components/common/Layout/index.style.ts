@@ -43,11 +43,17 @@ export const LayoutStyle = styled('div')<LayoutStyleProps>(
           position: 'relative',
           padding: '0 5rem',
 
-          '.profile': {
+          '.profile-contaienr': {
+            display: 'flex',
             position: 'absolute',
             right: 0,
+          },  
+
+          '.profile': {
+            marginLeft: '1rem',
             display: 'flex',
             alignItems: 'center',
+            cursor: 'pointer',
 
             'span': {
               marginLeft: '0.5rem',
@@ -104,6 +110,10 @@ export const LayoutStyle = styled('div')<LayoutStyleProps>(
         fontWeight: '400',
         textDecoration: 'none'
       },
+
+      '.MuiPaper-root.MuiMenu-paper': {
+        backgroundColor: 'white !important'
+      }
     }
   }
 );

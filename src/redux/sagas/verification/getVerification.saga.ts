@@ -24,11 +24,10 @@ function* getVerificationRequestSaga(
 ) {
   try {
     yield put(AppActions.loading.setLoading());
-
+    
     const result: ResponseGenerator = yield call(async () => {
       return await makeAPIRequst(`verification/get-verification/${action.payload.verificationID}`, "GET");
     });
-    
     yield put(AppActions.loading.finishLoading());
     yield put(AppActions.verification.getVerificationSuccess(result.data));
     if (action.payload.next) {

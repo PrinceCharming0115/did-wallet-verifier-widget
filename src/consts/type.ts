@@ -65,3 +65,7 @@ export const credentialSubjectArray = [
 
 export const countryList = ['UK','France', 'Italy','Cyprus','Finland'];
 
+export type qrCodeDataType = {
+	endpoint: string;
+	socketID: string;
+}

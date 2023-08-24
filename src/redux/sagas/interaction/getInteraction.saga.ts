@@ -51,5 +51,5 @@ function* getInteractionRequestSaga(
 }
 
 export default (function* () {
-  yield takeLatest("Interaction/getInteractionRequest", getInteractionRequestSaga);
+  yield takeLatest("interaction/getInteractionRequest", getInteractionRequestSaga);
 })();

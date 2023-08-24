@@ -12,3 +12,8 @@ export {
   reducer as interactionReducer,
   actions as interactionActions,
 } from "./interaction.slice";
+
+export {
+  reducer as authReducer,
+  actions as authActions,
+} from "./auth.slice";

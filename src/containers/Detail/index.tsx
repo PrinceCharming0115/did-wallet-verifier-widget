@@ -7,16 +7,27 @@ import { useLocation } from 'react-router-dom';
 export const DetailFlowContainer = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { verification } = useSelector((state: RootState) => state.verification);
-  const { interactions } = useSelector((state: RootState) => state.interaction);
-
+  const { interactions, interactionTotalNumber } = useSelector((state: RootState) => state.interaction);
+  const [pageNumber, setPageNumber] = useState<number>(1);
   const location = useLocation();
 
+  const paths = location.pathname.split('/');
+  
   useEffect(() => {
-    const paths = location.pathname.split('/');
     dispatch(AppActions.verification.getVerificationRequest({ verificationID: parseInt(paths[paths.length - 1]) }));
 
-    dispatch(AppActions.interaction.getInteractionsRequest({ verificationID: parseInt(paths[paths.length - 1]) }));
-  }, [dispatch]);
+    dispatch(AppActions.interaction.getInteractionsRequest({ verificationID: parseInt(paths[paths.length - 1]), pageNumber: pageNumber }));
+  }, []);
 
-  return <DetailFlowView verification={verification} interactions={interactions} />
+  useEffect(() => {
+    dispatch(AppActions.interaction.getInteractionsRequest({ verificationID: parseInt(paths[paths.length - 1]), pageNumber: pageNumber }));
+  }, [pageNumber]);
+
+  return <DetailFlowView 
+    verification={verification} 
+    interactions={interactions}
+    pageNumber={pageNumber} 
+    setPageNumber={setPageNumber}
+    interactionTotalNumber={interactionTotalNumber}
+  />
 }

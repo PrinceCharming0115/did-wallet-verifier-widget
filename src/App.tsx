@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import { ThemeProvider } from "@mui/material";
 import { darkTheme } from './styles';
 import { PATH } from './consts';
-import { store } from './redux/store';
+import { store, AppActions } from './redux/store';
 
 import {
   MainPage,
@@ -15,9 +15,28 @@ import {
 } from './pages';
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      console.log("askdf;alskdfj;alskdfj")
+      dispatch(AppActions.auth.getMeRequest({
+        errors: {
+          USER_IS_NOT_EXIST: () => {
+            console.log("not exist!")
+          },
+          UNAUTHORIZED: () => {
+            console.log('unauthrized')
+          }
+        }
+      }));
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={darkTheme}>
-      <Provider store={store}>
+      {/* <Provider store={store}> */}
         <BrowserRouter>
           <Routes>
             <Route path="*" element={<DownloadPage />}></Route>
@@ -30,7 +49,7 @@ function App() {
             <Route path="*" element={<Navigate to={PATH.MAIN} />}></Route> */}
           </Routes>
         </BrowserRouter>
-      </Provider>
+      {/* </Provider> */}
     </ThemeProvider>
   )
 }

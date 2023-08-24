@@ -66,9 +66,9 @@ export const MainView: React.FC<MainViewProps> = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.verifications.length > 0 && props.verifications.map((row, index) => (
+          {props.verifications.length > 0 && props.verifications.map((row) => (
             <TableRow
-              key={index}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -88,10 +88,10 @@ export const MainView: React.FC<MainViewProps> = (props) => {
           ))}
         </TableBody>
       </Table>
-      {/* <PaginationComponent 
+      <PaginationComponent 
         setPageNumber={props.setPageNumber} 
         pageNumber={props.pageNumber} 
-        verificationTotalNumber={props.verificationTotalNumber} /> */}
+        totalNumber={props.verificationTotalNumber} />
     </TableContainer>
   </MainViewStyle>
 };

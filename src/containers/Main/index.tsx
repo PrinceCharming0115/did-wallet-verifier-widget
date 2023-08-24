@@ -6,11 +6,17 @@ import { MainView } from '../../components/view';
 export const MainContainer = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { verifications, verificationTotalNumber }  = useSelector((state: RootState) => state.verification);
+
+
   const [pageNumber, setPageNumber] = useState<number>(1);
   
   useEffect(() => {
     dispatch(AppActions.verification.getVerificationsRequest({pageNumber}))
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(AppActions.verification.getVerificationsRequest({pageNumber}))
+  }, [pageNumber]);
 
   return <MainView 
     setPageNumber={setPageNumber} 

@@ -1,14 +1,10 @@
-import { AppActions } from "../../store";
-
-import { call, put } from "redux-saga/effects";
-
+import { call, put, takeLatest } from "redux-saga/effects";
 import { makeAPIRequst } from "../../../utils";
-
-import { takeLatest } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
-
-import * as AppActionTypes from "../../types";
 import { AxiosError } from "axios";
+import { AppActions } from "../../store";
+import * as AppActionTypes from "../../types";
+import { IAction } from "../../types/action";
 
 interface ResponseGenerator {
   config?: any;
@@ -19,18 +15,18 @@ interface ResponseGenerator {
   statusText?: string;
 }
 
-function* getInteractionsRequestSaga(
-  action: PayloadAction<AppActionTypes.Interaction.GetInteractionsRequestAction>
+function* getMeRequestSaga(
+  action: PayloadAction<IAction>
 ) {
   try {
     yield put(AppActions.loading.setLoading());
+
     const result: ResponseGenerator = yield call(async () => {
-      return await makeAPIRequst(`interaction/get-interaction-list/${action.payload.verificationID}?page=${action.payload.pageNumber}`, "GET");
+      return await makeAPIRequst(`auth/me`, "GET");
     });
-    console.log("result: ", result.data)
+    
     yield put(AppActions.loading.finishLoading());
-    yield put(AppActions.interaction.getInteractionsSuccess(result.data.interactionList));
-    yield put(AppActions.interaction.setInteractionTotalNumber(result.data.interactionTotalNumber));
+    yield put(AppActions.auth.getMeRequestSuccess(result.data));
     if (action.payload.next) {
       action.payload.next();
     }
@@ -51,5 +47,5 @@ function* getInteractionsRequestSaga(
 }
 
 export default (function* () {
-  yield takeLatest("interaction/getInteractionsRequest", getInteractionsRequestSaga);
+  yield takeLatest("auth/getMeRequest", getMeRequestSaga);
 })();

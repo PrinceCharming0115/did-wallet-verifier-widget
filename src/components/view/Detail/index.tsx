@@ -17,8 +17,7 @@ import { Link } from 'react-router-dom';
 import QRCode from 'react-qr-code';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { ButtonComponent } from '../../common';
-import { InputComponent } from '../../common';
+import { ButtonComponent, InputComponent, PaginationComponent } from '../../common';
 import { DetailFlowViewStyle } from './index.style';
 import { CloseSVG, EyeSVG, InteractionExportSVG, PdfSVG, PngSVG, UsersSVG } from '../../../assets/icon';
 import { CSVLink } from 'react-csv';
@@ -28,6 +27,9 @@ import { credentialSubjectArray } from '../../../consts';
 type DetailFlowViewProps = BoxProps & {
   verification: VerificationModel;
   interactions: InteractionModel[];
+  interactionTotalNumber: number;
+  setPageNumber: (currentNumber: number) => void;
+  pageNumber: number;
 };
 
 
@@ -38,7 +40,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: '#F5F2FD',
-  // border: '2px solid #000',
   borderRadius: '1.5rem',
   boxShadow: 24,
   fontFamily: 'Nunito',
@@ -83,6 +84,7 @@ const style = {
 };
 
 export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
+  console.log('props: ', props);
   type AttributeListType = {
     attribute: string;
     type: number
@@ -100,19 +102,9 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
   
   let temp = '';
   if (!!props.verification.verificationFlow) {
-    console.log("verificationFlow:", props.verification);
-
     temp = JSON.parse(props.verification.verificationFlow);
   }
   const verificationFlowKeys = Object.keys(temp);
-
-  const mockJson = {
-    1: 'Apple',
-    2: 'Orange',
-    3: 'Banana',
-    4: 'Pear'
-  }
-
 
   const handleAddAttributeClick = () => {
     setIsAddAttribute(true);
@@ -200,7 +192,10 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
             <Typography variant='h5' className='qr-code-preview-header bold-text font-nunito'>QR Access Onboard</Typography>
             <Box className='qr-code-wrapper'>
               <Box className='qr-code-container' id="QRCode">
-                <QRCode size={180} value={JSON.stringify(mockJson)} />
+                {
+                  !!props.verification.verificationFlow && 
+                    <QRCode size={180} value={props.verification.verificationFlow} />
+                }
               </Box>
             </Box>
             <Box className='export-btn-group'>
@@ -266,6 +261,10 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
                     ))}
                   </TableBody>
                 </Table>
+                <PaginationComponent 
+                  setPageNumber={props.setPageNumber} 
+                  pageNumber={props.pageNumber} 
+                  totalNumber={props.interactionTotalNumber} />
               </TableContainer>
             </Box>
             <Box className='export-interaction-group'> 

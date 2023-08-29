@@ -21,6 +21,11 @@ export const AgeRangeComponentStyle = styled(
       boxSizing: 'border-box',
       display: 'flex',
       justifyContent: 'space-between',
+
+      [customTheme.breakpoints.down('xl')]: {
+        width: '23rem'
+      },
+  
     },
 
     '.request-type': {

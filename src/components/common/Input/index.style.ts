@@ -29,6 +29,10 @@ export const InputComponentStyle = styled(
     borderColor: customTheme.colors.primary40,
     backgroundColor: customTheme.colors.secondary00,
 
+    [customTheme.breakpoints.down('xl')]: {
+      width: '23rem'
+    },
+
     ':has(div.error)': {
       border: `1px solid ${customTheme.colors.colorFeedbackWarning}`,
     },

@@ -16,7 +16,11 @@ export const ConnectViewStyle = styled(
 
     '.connect-header': {
       marginTop: '1rem',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+
+      [customTheme.breakpoints.down('lg')]: {
+        fontSize: '34px'
+      }
     },
 
     '.qr-code-wrapper': {
@@ -28,6 +32,14 @@ export const ConnectViewStyle = styled(
       width: '26.5rem',
       margin: '7rem auto',
       color: customTheme.colors.white,
+
+      [customTheme.breakpoints.down('lg')]: {
+        width: '24.5rem',
+
+        '.font-size-26px': {
+          fontSize: '21px'
+        }
+      },
 
       '.qr-code-container': {
         padding: '1rem',

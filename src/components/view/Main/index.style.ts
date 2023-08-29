@@ -12,6 +12,12 @@ export const MainViewStyle = styled('div')<MainViewStyleProps>(
         marginTop: '1.5rem'
       },
 
+      [customTheme.breakpoints.down('lg')]: {
+        '.font-size-40px': {
+          fontSize: '34px'
+        }
+      },
+
       '.new-flow-btn': {
         padding: '1rem',
         alignItems: 'center',
@@ -58,13 +64,21 @@ export const MainViewStyle = styled('div')<MainViewStyleProps>(
             border: 'none',
             fontWeight: '500',
             backgroundColor: customTheme.colors.primary100,
-            lineHeight: '1'
+            lineHeight: '1',
+
+            [customTheme.breakpoints.down('xl')]: {
+              fontSize: '15px'
+            }
           },
   
           '.thead-cell': {
             fontWeight: 'bold',
             textTransform: 'uppercase',
-            fontSize: '14px'
+            fontSize: '14px',
+
+            [customTheme.breakpoints.down('xl')]: {
+              fontSize: '13px'
+            }
           },
   
           '.link-to-page': {

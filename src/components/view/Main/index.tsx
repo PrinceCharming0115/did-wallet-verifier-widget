@@ -15,13 +15,15 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { CSVLink, CSVDownload } from "react-csv";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ButtonComponent, PaginationComponent } from '../../common';
 import { MainViewStyle } from './index.style';
 import { PlusSVG } from '../../../assets/sidebar';
 import { InteractionSVG } from '../../../assets/icon';
 import { PATH } from '../../../consts';
 import { VerificationModel } from '../../../models';
+import { getDateFormat } from '../../../utils';
+import { AppActions, RootState } from '../../../redux/store';
 
 
 type MainViewProps = BoxProps & {
@@ -31,19 +33,29 @@ type MainViewProps = BoxProps & {
   verificationTotalNumber: number;
 };
 
-function createData(
-  name: string,
-  createDate: string,
-  counter: number,
-  flow: string
-) {
-  return { name, createDate, counter, flow };
-}
-
-
 export const MainView: React.FC<MainViewProps> = (props) => {
   
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { interactions } = useSelector((state: RootState) => state.interaction);
+
+  const onClickHandle = (id: number) => {
+    dispatch(AppActions.interaction.getInteractionsRequest({verificationID: id, pageNumber: 0}))
+    
+    console.log("interactions", interactions);
+  
+    // // Generate the CSV content
+    // const csvContent = "data:text/csv;charset=utf-8,"
+    //   + JSON.stringify(interactions);
+  
+    // // Create a temporary link element
+    // const link = document.createElement("a");
+    // link.href = encodeURI(csvContent);
+    // link.download = "interactions.csv";
+  
+    // // Trigger the link click event to start the download
+    // link.click();
+  }
 
   return <MainViewStyle>
     <Typography className='font-size-40px font-nunito bold-text'>Available flows</Typography>
@@ -74,18 +86,26 @@ export const MainView: React.FC<MainViewProps> = (props) => {
               <TableCell component="th" scope="row">
                 {row.verificationFlowName}
               </TableCell>
-              <TableCell>{row.createdAt}</TableCell>
-              <TableCell align='center'>{9}</TableCell>
+              <TableCell>{getDateFormat(row.createdAt)}</TableCell>
+              <TableCell align='center'>{row.accessCount}</TableCell>
               <TableCell align='center'>
-                <CSVLink data={row.verificationFlow} filename='interaction.csv' className='interaction-btn'>
+                <Button onClick={() => {onClickHandle(row.id)}} className='interaction-btn'>
                   <img src={InteractionSVG}></img>
-                </CSVLink>
+                </Button>
               </TableCell>
               <TableCell>
                 <Link  className='link-to-page' to={`${PATH.FLOW}/${row.id}`}>Verification page</Link>
               </TableCell>
             </TableRow>
           ))}
+          {
+            props.verifications.length === 0 && 
+            <TableRow>
+              <TableCell className='text-center' colSpan={5}>
+                There is no data to display.
+              </TableCell>
+            </TableRow>
+          }
         </TableBody>
       </Table>
       <PaginationComponent 

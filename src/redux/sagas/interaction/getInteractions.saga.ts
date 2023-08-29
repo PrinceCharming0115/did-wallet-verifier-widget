@@ -27,7 +27,6 @@ function* getInteractionsRequestSaga(
     const result: ResponseGenerator = yield call(async () => {
       return await makeAPIRequst(`interaction/get-interaction-list/${action.payload.verificationID}?page=${action.payload.pageNumber}`, "GET");
     });
-    console.log("result: ", result.data)
     yield put(AppActions.loading.finishLoading());
     yield put(AppActions.interaction.getInteractionsSuccess(result.data.interactionList));
     yield put(AppActions.interaction.setInteractionTotalNumber(result.data.interactionTotalNumber));

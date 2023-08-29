@@ -4,7 +4,7 @@ import { InteractionModel } from "../../models"
 
 export type GetInteractionsRequestAction = IAction & {
   verificationID: number,
-  pageNumber: number
+  pageNumber?: number
 }
 
 export type GetInteractionsSuccessAction = {

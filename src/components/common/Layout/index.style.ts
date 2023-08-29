@@ -20,17 +20,25 @@ export const LayoutStyle = styled('div')<LayoutStyleProps>(
       backgroundColor: customTheme.colors.primary00,
 
       '.navbar-container': {
-        width: '20%',
+        width: '311px',
         minWidth: '13rem',
+
+        [customTheme.breakpoints.down('xl')]: {
+          width: '240px'
+        },
       },
 
       '.main-container': {
-        width: '80%',
+        width: 'calc(100% - 311px)',
         backgroundColor: customTheme.colors.white,
         borderRadius: '2rem 0 0 2rem',
         backgroundSize: 'cover',
         padding: '4rem 2rem',
-        backgroundImage: (currentPath !== PATH.CONNECT && currentPath !== PATH.FIRST) ? '' : 'url(/world.jpg)',
+        backgroundImage: (currentPath !== PATH.CONNECT && currentPath !== PATH.FIRST && currentPath !== PATH.DOWNLOAD) ? '' : 'url(/world.jpg)',
+
+        [customTheme.breakpoints.down('xl')]: {
+          width: 'calc(100% - 240px)',
+        },
 
         '.header-container': {
           width: '100%',
@@ -42,6 +50,14 @@ export const LayoutStyle = styled('div')<LayoutStyleProps>(
           height: '100%',
           position: 'relative',
           padding: '0 5rem',
+
+          [customTheme.breakpoints.down('xl')]: {
+            padding: '0 3rem'
+          },
+
+          [customTheme.breakpoints.down('xl')]: {
+            padding: '0 2rem'
+          },
 
           '.profile-contaienr': {
             display: 'flex',
@@ -113,6 +129,10 @@ export const LayoutStyle = styled('div')<LayoutStyleProps>(
 
       '.MuiPaper-root.MuiMenu-paper': {
         backgroundColor: 'white !important'
+      },
+
+      '.text-center': {
+        textAlign: 'center'
       }
     }
   }

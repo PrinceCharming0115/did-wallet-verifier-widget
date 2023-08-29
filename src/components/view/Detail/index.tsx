@@ -23,6 +23,7 @@ import { CloseSVG, EyeSVG, InteractionExportSVG, PdfSVG, PngSVG, UsersSVG } from
 import { CSVLink } from 'react-csv';
 import { VerificationModel, InteractionModel } from '../../../models';
 import { credentialSubjectArray } from '../../../consts';
+import { getDateFormat } from '../../../utils';
 
 type DetailFlowViewProps = BoxProps & {
   verification: VerificationModel;
@@ -84,7 +85,7 @@ const style = {
 };
 
 export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
-  console.log('props: ', props);
+ 
   type AttributeListType = {
     attribute: string;
     type: number
@@ -215,7 +216,7 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
           <Box className='export-interaction-container'>
             <Box className='export-table-container'>
               <TableContainer component={Paper} className='interaction-table'>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <Table sx={{ minWidth: 450 }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell className='thead-cell'>Name</TableCell>
@@ -225,9 +226,9 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {props.interactions.map((row, index) => (
+                    {  props.interactions.length > 0 && props.interactions.map((row) => (
                       <TableRow
-                        key={index}
+                        key={row.id}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                       >
                         <TableCell component="th" scope="row">
@@ -251,7 +252,7 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
                                     'Failed'
                           }
                         </TableCell>
-                        <TableCell align='center'>{row.createdAt}</TableCell>
+                        <TableCell align='center'>{getDateFormat(row.createdAt)}</TableCell>
                         <TableCell align='center'>
                           <Link onClick={handleOpen} to='#javascript'>
                             <img src={EyeSVG}></img>
@@ -259,6 +260,14 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
                         </TableCell>
                       </TableRow>
                     ))}
+                    {
+                      props.interactions.length === 0 && 
+                      <TableRow>
+                        <TableCell className='text-center' colSpan={5}>
+                          There is no data to display.
+                        </TableCell>
+                      </TableRow>
+                    }
                   </TableBody>
                 </Table>
                 <PaginationComponent 
@@ -274,7 +283,7 @@ export const DetailFlowView: React.FC<DetailFlowViewProps> = (props) => {
               </CSVLink>
               <Box className='counter-container'>
                 <img src={UsersSVG}></img>
-                <span className='counter font-nunito'>0</span>
+                <span className='counter font-nunito'>{ props.interactionTotalNumber }</span>
                 <span className='font-nunito'>Access counter</span>
               </Box>
             </Box>

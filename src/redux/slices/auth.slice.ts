@@ -4,12 +4,12 @@ import { IAction } from "../types/action";
 
 type AuthState = {
   did: string;
-  userInfo: object;
+  token: string | null;
 };
 
 const initialState: AuthState = {
   did: '',
-  userInfo: {}
+  token: localStorage.getItem("token"),
 };
 
 const interactionSlice = createSlice({
@@ -22,10 +22,18 @@ const interactionSlice = createSlice({
       action: PayloadAction<string>
     ) {
       state.did = action.payload;
-     },
+    },
+
+    // Set Token
+    setToken(
+      state: AuthState,
+      action: PayloadAction<string>
+    ) {
+      state.token = action.payload;
+    },
 
      // Get me
-     getMeRequest(
+    getMeRequest(
       state: AuthState,
       action: PayloadAction<IAction>
     ) { },
@@ -40,6 +48,7 @@ const interactionSlice = createSlice({
     logout(state: AuthState) { 
       state.did = "";
 			localStorage.removeItem("token");
+      state.token = '';
     }
 
   },

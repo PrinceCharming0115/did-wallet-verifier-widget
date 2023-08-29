@@ -37,7 +37,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   const { did } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-
+  
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -72,7 +72,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
     <Box className='main-container'>
       <Box className='body-container'>
         {
-          (currentPath !== PATH.CONNECT && currentPath !== PATH.FIRST) &&
+          (currentPath !== PATH.CONNECT && currentPath !== PATH.FIRST && currentPath !== PATH.DOWNLOAD && !!localStorage.getItem('token')) &&
           <Box className='profile-contaienr'>
               <img src={ProfileSVG}></img>
             <Box className='profile' onClick={handleClick}>

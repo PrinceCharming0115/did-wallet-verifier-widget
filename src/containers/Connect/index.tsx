@@ -11,6 +11,7 @@ export const ConnectContainer = () => {
   const [socketID, setSocketID] = useState<string>('');
   const socket = io(process.env.REACT_APP_SOCKET_SERVER_ENDPOINT ?? '');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   
   useEffect(() => {
     socket.on("connect", () => {
@@ -19,6 +20,7 @@ export const ConnectContainer = () => {
    
       socket.on(socket.id, (token) => {
         localStorage.setItem("token", token);
+        dispatch(AppActions.auth.setToken(token));
         navigate(PATH.MAIN);
       });
     });

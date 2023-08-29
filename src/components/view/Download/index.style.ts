@@ -72,6 +72,14 @@ export const DownloadViewStyle = styled('div')<DownloadViewStyleProps>(
           borderRadius: '1.25rem',
           padding: '1rem',
           fontSize: '15px',
+
+          [customTheme.breakpoints.down('lg')]: {
+            '.font-size-18px': {
+              fontSize: '14px'
+            },
+
+            padding: '0.75rem'
+          },
     
           '.next-btn': {
             marginLeft: '2rem',
@@ -82,6 +90,10 @@ export const DownloadViewStyle = styled('div')<DownloadViewStyleProps>(
             backgroundColor: customTheme.colors.btnPrimary00,
             textDecoration: 'none',
             color: customTheme.colors.white,
+
+            [customTheme.breakpoints.down('lg')]: {
+              marginLeft: '1rem'
+            },
     
             'img': {
               marginLeft: '1rem'

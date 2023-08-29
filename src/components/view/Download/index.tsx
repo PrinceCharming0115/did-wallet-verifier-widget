@@ -16,12 +16,9 @@ type DownloadViewProps = BoxProps & {
 
 export const DownloadView: React.FC<DownloadViewProps> = (props) => {
 
-  const mockJson = {
-    1: 'Apple',
-    2: 'Orange',
-    3: 'Banana',
-    4: 'Pear'
-  }
+  const qrCodeDataToDownload ={
+    value: process.env.REACT_APP_QRCODE_DATA_TO_DOWNLOAD
+  } 
 
   return <DownloadViewStyle>
     <Typography variant='h4' className='font-size-40px bold-text font-nunito'>Download Exoid App</Typography>
@@ -48,7 +45,7 @@ export const DownloadView: React.FC<DownloadViewProps> = (props) => {
     <Box className='qr-code-wrapper'>
       <Typography className='font-nunito font-size-21px'>Or scan this QR code to download</Typography>
       <Box className='qr-code-container'>
-          <QRCode value={JSON.stringify(mockJson)} />
+          <QRCode value={JSON.stringify(qrCodeDataToDownload)} />
       </Box>
     </Box>
     <Box className='next-btn-group'>

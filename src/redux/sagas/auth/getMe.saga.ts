@@ -22,10 +22,11 @@ function* getMeRequestSaga(
     yield put(AppActions.loading.setLoading());
 
     const result: ResponseGenerator = yield call(async () => {
-      return await makeAPIRequst(`auth/me`, "GET");
+      return await makeAPIRequst(`auth/me`, "GET", '', true);
     });
     
     yield put(AppActions.loading.finishLoading());
+    console.log("did:", result.data)
     yield put(AppActions.auth.getMeRequestSuccess(result.data));
     if (action.payload.next) {
       action.payload.next();

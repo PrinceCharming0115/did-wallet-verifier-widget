@@ -1,7 +1,7 @@
 export interface InteractionModel {
-  id: string;
+  id: number;
   verificationID: string;
   verificationData: string;
   result: number;
-  createdAt: string;
+  createdAt: Date;
 }

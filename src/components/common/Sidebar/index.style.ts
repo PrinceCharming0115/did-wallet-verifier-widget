@@ -18,10 +18,18 @@ export const DesktopSidebarComponentStyle = styled('div')<DesktopSidebarComponen
         marginLeft: '9%',
         width: '200px',
         marginBottom: '2rem',
+
+        [customTheme.breakpoints.down('lg')]: {
+          width: '180px',
+        },
       },
 
       '.sidebar-list': {
         padding: '2rem',
+
+        [customTheme.breakpoints.down('xl')]: {
+          padding: '2rem 1.5rem'
+        },
 
         '.sidebar-item': {
           
@@ -35,7 +43,16 @@ export const DesktopSidebarComponentStyle = styled('div')<DesktopSidebarComponen
           '.sidebar-link-text': {
             marginLeft: '1rem',
             fontFamily: 'Nunito',
-            fontSize: '17px'
+            fontSize: '17px',
+
+            [customTheme.breakpoints.down('xl')]: {
+              fontSize: '16px',
+              marginLeft: '0.5rem'
+            },
+
+            [customTheme.breakpoints.down('lg')]: {
+              fontSize: '14px',
+            },
           }
         },
 

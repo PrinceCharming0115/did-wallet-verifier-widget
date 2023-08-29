@@ -38,7 +38,11 @@ export const CreateFlowViewStyle = styled(
           '.add-attribute-btn-wrapper': {
             display: 'flex',
             justifyContent: 'space-between',
-            width: '28rem'
+            width: '28rem',
+
+            [customTheme.breakpoints.down('xl')]: {
+              width: '23rem'
+            },
           }
         },
 
@@ -70,7 +74,11 @@ export const CreateFlowViewStyle = styled(
             },
 
             '.attribute-list': {
-              width: '28rem'
+              width: '28rem',        
+
+              [customTheme.breakpoints.down('xl')]: {
+                width: '23rem'
+              },
             }
           },
 

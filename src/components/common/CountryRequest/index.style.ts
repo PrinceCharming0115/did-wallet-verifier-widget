@@ -20,6 +20,11 @@ export const CountryRequestComponentStyle = styled(
       width: '28rem',
       padding: '1rem 1rem 1rem 1rem',
       boxSizing: 'border-box',
+
+      [customTheme.breakpoints.down('xl')]: {
+        width: '23rem'
+      },
+  
     },
 
     '.request-type': {

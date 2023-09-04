@@ -12,7 +12,7 @@ type InputComponentStyleProps = StyledComponentProps &
 
 export const InputComponentStyle = styled(
   'div'
-)<InputComponentStyleProps>(({ theme, border }) => {
+)<InputComponentStyleProps>(({ theme, border, error, inputSize}) => {
   const customTheme = theme as CustomTheme;
 
   return {
@@ -29,13 +29,13 @@ export const InputComponentStyle = styled(
     borderColor: customTheme.colors.primary40,
     backgroundColor: customTheme.colors.secondary00,
 
-    // ':has(div.focused)': {
-    //   outline: `1px solid ${customTheme.colors.primaryLight80}`,
-    // },
+    [customTheme.breakpoints.down('xl')]: {
+      width: '23rem'
+    },
 
-    // ':has(div.error)': {
-    //   outline: `1px solid ${customTheme.colors.errorDark}`,
-    // },
+    ':has(div.error)': {
+      border: `1px solid ${customTheme.colors.colorFeedbackWarning}`,
+    },
 
     '.text-container': {
       display: 'flex',

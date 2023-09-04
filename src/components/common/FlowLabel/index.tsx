@@ -1,20 +1,31 @@
 import React from 'react';
-import { BoxProps, Button } from '@mui/material';
+import { 
+  BoxProps, 
+  Button ,
+  Box
+} from '@mui/material';
 import { FlowLabelComponentStyle } from './index.style';
 import { TrashSVG } from '../../../assets/icon';
 
 type FlowLabelComponentProps = BoxProps & {
   label: string;
-  isCreated?: boolean;
+  index: number;
+  type: string;
+  removeAttribute: (index: number, label: string) => void;
 };
 
 export const FlowLabelComponent: React.FC<FlowLabelComponentProps> = (props) => {
-  const { label, isCreated, ...rest } = props;
+  const { label, index, type, removeAttribute } = props;
 
-  return <FlowLabelComponentStyle className={rest.className} >
-    { label }
-    <Button className="remove-btn">
-      <img src={TrashSVG}></img>
-    </Button>
+  return <FlowLabelComponentStyle >
+    <Box className='request-container'>
+      { label }
+      <Button className="remove-btn" onClick={() => removeAttribute(index, label)}>
+        <img src={TrashSVG}></img>
+      </Button>
+    </Box>
+    <Box className='request-type'>
+      {type}
+    </Box>
   </FlowLabelComponentStyle>
 }

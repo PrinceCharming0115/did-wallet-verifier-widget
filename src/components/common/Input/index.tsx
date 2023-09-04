@@ -4,6 +4,7 @@ import { UseFormRegister, RegisterOptions } from 'react-hook-form';
 import { InputComponentStyle } from './index.style';
 
 type InputComponentProps = InputProps & {
+  error?: boolean;
   label?: string;
   border?: boolean;
   frontIcon?: React.ReactNode;
